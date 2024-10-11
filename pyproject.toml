@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyargdown"
+dynamic = ["version"]
+description = 'Parsing and processing argdown snippets in python'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "AGPL-3.0"
+keywords = []
+authors = [
+  { name = "Gregor Betz", email = "3662782+ggbetz@users.noreply.github.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/debatelab/pyargdown#readme"
+Issues = "https://github.com/debatelab/pyargdown/issues"
+Source = "https://github.com/debatelab/pyargdown"
+
+[tool.hatch.version]
+path = "src/pyargdown/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/pyargdown tests}"
+
+[tool.coverage.run]
+source_pkgs = ["pyargdown", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/pyargdown/__about__.py",
+]
+
+[tool.coverage.paths]
+pyargdown = ["src/pyargdown", "*/pyargdown/src/pyargdown"]
+tests = ["tests", "*/pyargdown/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
