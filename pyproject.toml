@@ -7,7 +7,7 @@ name = "pyargdown"
 dynamic = ["version"]
 description = 'Parsing and processing argdown snippets in python'
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = "AGPL-3.0"
 keywords = []
 authors = [
@@ -16,15 +16,23 @@ authors = [
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = [
+    "lark>=1.2.2",
+    "networkx>=3.4.2,<3.6",
+    "pyyaml>=6.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "datasets",
+]
 
 [project.urls]
 Documentation = "https://github.com/debatelab/pyargdown#readme"
@@ -34,28 +42,12 @@ Source = "https://github.com/debatelab/pyargdown"
 [tool.hatch.version]
 path = "src/pyargdown/__about__.py"
 
-[tool.hatch.envs.types]
-extra-dependencies = [
-  "mypy>=1.0.0",
+[tool.hatch.envs.test]
+python = "3.10"
+dependencies = [
+  "pytest>=8.3.4",
+  "datasets",
 ]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/pyargdown tests}"
+[tool.hatch.envs.test.scripts]
+run = "pytest {args:tests/}"
 
-[tool.coverage.run]
-source_pkgs = ["pyargdown", "tests"]
-branch = true
-parallel = true
-omit = [
-  "src/pyargdown/__about__.py",
-]
-
-[tool.coverage.paths]
-pyargdown = ["src/pyargdown", "*/pyargdown/src/pyargdown"]
-tests = ["tests", "*/pyargdown/tests"]
-
-[tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
