@@ -11,9 +11,10 @@ pip install "git+https://github.com/debatelab/pyargdown"
 Use:
 
 ```python
+from textwrap import dedent
 import pyargdown as agd
 
-snippet = """\
+snippet = dedent("""
 [Claim A]
     + <Reason 1>
     - <Reason 2>
@@ -23,7 +24,7 @@ snippet = """\
 (1) Premise 1.
 -----
 (2) [Claim B]: Conclusion.
-"""
+""")
 
 argdown = agd.parse_argdown(snippet)
 assert isinstance(argdown, agd.ArgdownMultiDiGraph)
