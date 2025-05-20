@@ -22,6 +22,7 @@ class ReasonRelation(enum.Enum):
     RIGHT_UNDERCUT = "RIGHT_UNDERCUT"
 
 class ArgdownSyntaxError(SyntaxError):
+    label = "Base Argdown syntax error"
     def __str__(self):
         context, line, column = self.args
         return '%s at line %s, column %s.\n\n%s' % (self.label, line, column, context)
@@ -64,7 +65,7 @@ class ArgdownParser(ABC):
 
     @staticmethod
     @abstractmethod
-    def ingest_in_argmap(tree: Tree, argdown: Argdown):
+    def ingest_in_argmap(tree: Tree, argdown: Argdown) -> Argdown:
         pass
 
     def __call__(self, text: str) -> Tree:

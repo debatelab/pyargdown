@@ -176,12 +176,12 @@ _ERROR_EXAMPLES = {
 
 
 class ArgdownMapIndenter(Indenter):
-    NL_type = "_NL"
-    OPEN_PAREN_types = []
-    CLOSE_PAREN_types = []
-    INDENT_type = "_INDENT"
-    DEDENT_type = "_DEDENT"
-    tab_len = 4
+    NL_type = "_NL"  # type: ignore
+    OPEN_PAREN_types = []  # type: ignore
+    CLOSE_PAREN_types = []  # type: ignore
+    INDENT_type = "_INDENT"  # type: ignore
+    DEDENT_type = "_DEDENT"  # type: ignore
+    tab_len = 4  # type: ignore
 
 
 class ArgumentMapTreeTransformer(Transformer):
@@ -268,12 +268,12 @@ class ArgumentMapTreeTransformer(Transformer):
     @lark.v_args(inline=True)
     def child(self, relation, reason_label, *children):
         reason_relation = ReasonRelation(relation.type)
-        self.process_children(reason_label, children)
+        self.process_children(reason_label, children)  # type: ignore
         return reason_relation, reason_label
 
     @lark.v_args(inline=True)
     def root(self, reason_label, *children):
-        self.process_children(reason_label, children)
+        self.process_children(reason_label, children)  # type: ignore
         return reason_label
 
 
